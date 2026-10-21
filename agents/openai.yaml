@@ -1,0 +1,4 @@
+interface:
+  display_name: "UAT UI 流程图 PDF"
+  short_description: "沿用已认可样板，以完整长截图、红色步骤箭头及独立流程分页制作 UAT PDF"
+  default_prompt: "使用 $uat-ui-flow-pdf，按已认可的 Pacific Auto 样板制作这个产品的 UAT UI 流程图。"
