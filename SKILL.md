@@ -1,6 +1,6 @@
 ---
 name: uat-ui-flow-pdf
-description: Create insurer-facing UAT UI flow PDFs from real application screenshots, following the user-approved Pacific Auto style. Use for UAT流程图, UI检查PDF, complete scrolling screen documentation, screenshot journeys with red next-step arrows, or requests to repeat the Pacific Auto PDF format for another product.
+description: Create insurer-facing UAT UI flow PDFs by clicking through the real running application step by step and taking actual screenshots, following the user-approved Pacific Auto style. Use for UAT流程图, UI检查PDF, complete scrolling screen documentation, screenshot journeys with red next-step arrows, or requests to repeat the Pacific Auto PDF format for another product.
 ---
 
 # UAT UI Flow PDF
@@ -9,6 +9,9 @@ Produce a reviewable PDF using the approved visual reference in `assets/approved
 
 ## Required result
 
+- Use the actual running application and click through its visible controls one step at a time. Capture each reached state and verify the result before continuing. Source code may guide discovery; it cannot substitute for the UI journey.
+- Never create or serve replacement HTML, static mockups, isolated component previews or reconstructed screens to bypass the real flow. Do not inject API responses, assign component/DOM state, alter business logic/data or use hand-constructed routes to manufacture a missing outcome or skip required steps. PDF layout code may arrange genuine captures and annotations only.
+- When a required screen/data record is missing, a step fails, or access/approval prevents continuing, ask the user for concrete help at that step (such as signing in, providing a test record or manually completing the blocked action). Continue independent captures while waiting; never silently skip the step or present the requested full flow as complete.
 - Prefer one flow per page; use two consecutive pages only when necessary. Every new flow starts on a new page. Never put unrelated flows on the same page.
 - Capture the ENTIRE screen content, including everything below the fold. No top-only or bottom-only screenshot. Keep all fields, premium breakdowns, notices, buttons and relevant expanded sections visible.
 - Connect numbered steps with prominent RED ARROWS. Show the actual action, branch condition, retry target and next page/step. A collage without connections is not a flow diagram.
@@ -21,10 +24,10 @@ Produce a reviewable PDF using the approved visual reference in `assets/approved
 
 1. Announce this skill and inspect the approved preview/PDF and available app/source/captures. Reuse current-task context. Ask only for a missing essential such as the target application when it cannot be inferred.
 2. Inventory actual user journeys and states. Include main purchase paths, material branches, pending/failure/retry, validation and completion where the app actually supports them. Record flow IDs, steps, trigger actions and page plan. Do not assume every product has the reference's ten flows.
-3. Capture real UI in an isolated browser/session at a consistent mobile width. Read `references/capture-and-qa.md` before capture. Do not change business code or create real payments/issuance just for screenshots. If approved test paths are unavailable, use clearly disclosed illustrative state in the real UI, or report the missing evidence instead of inventing screens.
+3. Read `references/capture-and-qa.md`, then operate the real running app through visible controls at a consistent mobile width, preferably in an isolated session when this does not discard needed login/data. Capture and verify each step before clicking the next action. Use an existing app test/mock mode only within the user's authorization, label it clearly, and verify the destination instead of treating a mock popup as a backend result. Do not create real payments/issuance just for screenshots. If the next required state cannot be reached, request the user's help and resume from the actual state after the handoff.
 4. Build the PDF with `scripts/build_flow_pdf.py` and `references/layout-schema.md`. Use available PDF skill guidance for PDF lifecycle/rendering and discover bundled Python dependencies through `load_workspace_dependencies`. Save the PDF and manifest/captures in the task workspace; do not write generated task artifacts into the installed skill.
 5. Render and visually inspect EVERY final page, including any page changed after feedback. Verify complete content, arrow meaning, branching, legibility and page boundaries. Check the renderer's `.layout.json` plus source screenshot dimensions. Fix and rerender until correct.
-6. Deliver the PDF link/preview with page/flow counts and only material limitations. Use the user's language for conversation; follow the app/reference language for document labels unless requested otherwise. Do not send it to the insurer unless explicitly asked.
+6. Deliver the PDF link/preview with page/flow counts and only material limitations. If required steps remain blocked, ask for the specific user assistance needed; any interim PDF must be labeled partial, with uncaptured transitions identified. Use the user's language for conversation; follow the app/reference language for document labels unless requested otherwise. Do not send it to the insurer unless explicitly asked.
 
 ## Approved visual treatment
 
